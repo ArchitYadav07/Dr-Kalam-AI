@@ -138,20 +138,21 @@ export default function AvatarScene({ isTalking = false }: { isTalking?: boolean
           <pointLight position={[2, 1, 3]} color="#3b82f6" intensity={3} />
           {!isMobile && <pointLight position={[-2, 1, -2]} color="#6366f1" intensity={2} />}
           
-          <PresentationControls
-            global
-            rotation={[0, 0, 0]}
-            polar={[-Math.PI / 6, Math.PI / 6]}
-            azimuth={[-Math.PI / 4, Math.PI / 4]}
-          >
-            {isMobile ? (
-              <KalamModel isTalking={isTalking} isMobile={isMobile} />
-            ) : (
+          {isMobile ? (
+            /* Mobile: No PresentationControls so page scroll works */
+            <KalamModel isTalking={isTalking} isMobile={isMobile} />
+          ) : (
+            <PresentationControls
+              global
+              rotation={[0, 0, 0]}
+              polar={[-Math.PI / 6, Math.PI / 6]}
+              azimuth={[-Math.PI / 4, Math.PI / 4]}
+            >
               <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
                 <KalamModel isTalking={isTalking} isMobile={isMobile} />
               </Float>
-            )}
-          </PresentationControls>
+            </PresentationControls>
+          )}
 
           {!isMobile && (
             <ContactShadows position={[0, -2, 0]} opacity={0.5} scale={8} blur={3} far={4} />

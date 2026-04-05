@@ -87,6 +87,7 @@ function LoadingOverlay() {
 export default function Home() {
   const [isTalking, setIsTalking] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const chatSectionRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -94,6 +95,10 @@ export default function Home() {
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
+
+  const scrollToChat = () => {
+    chatSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Mobile: vertical scroll layout
   if (isMobile) {
@@ -109,7 +114,14 @@ export default function Home() {
             <h1>Dr. <span className="title-highlight">Kalam</span> AI</h1>
             <p className="subtitle">Inspiring the minds of tomorrow.</p>
           </div>
-          <div className="scroll-indicator">
+          
+          <div className="mobile-action-button" onClick={scrollToChat}>
+            <button className="glass-btn">
+              Chat with Dr. Kalam
+            </button>
+          </div>
+
+          <div className="scroll-indicator" onClick={scrollToChat}>
             <span>Scroll to chat</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 5v14M5 12l7 7 7-7" />
@@ -118,7 +130,7 @@ export default function Home() {
         </section>
 
         {/* Section 2: Chat */}
-        <section className="mobile-chat-section">
+        <section className="mobile-chat-section" ref={chatSectionRef}>
           <Chat onTalkingChange={setIsTalking} />
           <div className="mobile-footer">
             <p>Developed with ❤️ by <strong>Archit</strong></p>
@@ -152,4 +164,5 @@ export default function Home() {
     </main>
   );
 }
+
 
