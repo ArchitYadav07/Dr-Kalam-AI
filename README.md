@@ -17,6 +17,10 @@
 
 Combining **generative AI** with **high-fidelity 3D rendering**, this project allows users to seek inspiration, wisdom, and scientific guidance from a conversational avatar that embodies Dr. Kalam's humble yet powerful persona.
 
+<p align="center">
+  <img src="./public/preview.png" alt="Dr. Kalam AI Preview" width="100%" style="border-radius: 12px;" />
+</p>
+
 ---
 
 ## ✨ Features
