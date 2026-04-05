@@ -310,6 +310,39 @@ body {
   margin-top: 0.5rem;
 }
 
+/* Mobile Action Button */
+.mobile-action-button {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 80%;
+  max-width: 300px;
+}
+
+.glass-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-btn:active {
+  transform: scale(0.98);
+  background: rgba(59, 130, 246, 0.2);
+}
+
 /* Scroll down indicator */
 .scroll-indicator {
   position: absolute;
