@@ -255,3 +255,106 @@ body {
   border-radius: 10px;
 }
 
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
+  .main-container {
+    height: 100dvh; /* dynamic viewport height for mobile browsers */
+  }
+
+  .title-card {
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    max-width: 100%;
+  }
+
+  .title-card h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .subtitle-quote {
+    font-size: 0.75rem;
+    display: none; /* hide quote on small screens for space */
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .chat-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 55vh;
+  }
+
+  .chat-messages {
+    max-height: 30vh;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .chat-header {
+    padding: 1rem;
+  }
+
+  .chat-header h2 {
+    font-size: 1rem;
+  }
+
+  .message {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .chat-input-wrapper {
+    padding: 0.75rem;
+  }
+
+  .chat-input {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-credit {
+    bottom: auto;
+    top: auto;
+    left: 1.5rem;
+    position: relative;
+    margin-top: 0.5rem;
+    display: none; /* hide on mobile to save space, shown in landscape */
+  }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .chat-container {
+    max-height: 65vh;
+    width: 50%;
+    right: 0;
+    left: auto;
+    border-radius: 20px 0 0 0;
+  }
+
+  .title-card h1 {
+    font-size: 1.75rem;
+  }
+}
