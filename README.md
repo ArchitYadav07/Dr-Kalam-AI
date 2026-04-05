@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ![Dr. Kalam AI Logo](./public/logo.png) Dr. Kalam AI
 
-## Getting Started
+> "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action." — Dr. A.P.J. Abdul Kalam
 
-First, run the development server:
+**Dr. Kalam AI** is a cutting-edge interactive experience that brings the visionary spirit of India's 11th President and "Missile Man," Dr. A.P.J. Abdul Kalam, to life. 
 
+Combining **generative AI** with **high-fidelity 3D rendering**, this project allows users to seek inspiration, wisdom, and scientific guidance from a conversational avatar that embodies Dr. Kalam's humble yet powerful persona.
+
+---
+
+## ✨ Features
+
+- **🗣️ Interactive AI Persona**: Powered by Google Gemini, the AI is fine-tuned to mirror Dr. Kalam's inspiring, humble, and intellectual vocabulary.
+- **🗿 Premium 3D Avatar**: A high-depth metallic sculpture rendered in real-time, featuring procedural animations like:
+    - **Dynamic Blinking**: Natural eye-lids movement.
+    - **Adaptive Talking**: Realistic neck and jaw bobbing synchronized with AI text generation.
+    - **Idle Swaying**: Gentle breathing and swaying for a lifelike presence.
+- **💎 Glassmorphic UI**: A premium, modern chat interface designed with "Vision 2026" aesthetics.
+- **⚡ Real-time Communication**: Optimized API routes using the latest Google Generative AI models.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **3D Engine**: [Three.js](https://threejs.org/) with [React Three Fiber](https://r3f.docs.pmnd.rs/) & [@react-three/drei](https://github.com/pmndrs/drei)
+- **AI Engine**: [Google Gemini 1.5/2.0 Flash](https://ai.google.dev/gemini-api)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) (Tailored Glassmorphism)
+- **Deployment**: [Netlify](https://www.netlify.com/) / [Vercel](https://vercel.com/)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- Node.js 18+
+- A Google AI Studio [API Key](https://aistudio.google.com/app/apikey)
+
+### 2. Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ArchitYadav07/Dr-Kalam-AI.git
+cd Dr-Kalam-AI
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Variables
+Create a `.env.local` file in the root directory and add your API key:
+```env
+GEMINI_API_KEY=YOUR_API_KEY_HERE
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📜 License
+This project is for educational and inspirational purposes. 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Designed with ❤️ for the students and dreamers of tomorrow.
