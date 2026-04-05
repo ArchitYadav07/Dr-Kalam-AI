@@ -86,16 +86,54 @@ function LoadingOverlay() {
 
 export default function Home() {
   const [isTalking, setIsTalking] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // Mobile: vertical scroll layout
+  if (isMobile) {
+    return (
+      <div className="mobile-scroll-container">
+        <LoadingOverlay />
+
+        {/* Section 1: Full-screen 3D Model */}
+        <section className="mobile-model-section">
+          <AvatarScene isTalking={isTalking} />
+          <div className="mobile-title-overlay">
+            <span className="badge">Vision 2026</span>
+            <h1>Dr. <span className="title-highlight">Kalam</span> AI</h1>
+            <p className="subtitle">Inspiring the minds of tomorrow.</p>
+          </div>
+          <div className="scroll-indicator">
+            <span>Scroll to chat</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
+        </section>
+
+        {/* Section 2: Chat */}
+        <section className="mobile-chat-section">
+          <Chat onTalkingChange={setIsTalking} />
+          <div className="mobile-footer">
+            <p>Developed with ❤️ by <strong>Archit</strong></p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Desktop: overlay layout (unchanged)
   return (
     <main className="main-container">
-      {/* Decoupled Loading UI */}
       <LoadingOverlay />
-
-      {/* 3D Avatar Background */}
       <AvatarScene isTalking={isTalking} />
 
-      {/* UI Overlay */}
       <div className="ui-layer">
         <div className="title-card">
           <span className="badge">Vision 2026</span>
@@ -104,10 +142,8 @@ export default function Home() {
           <p className="subtitle-quote">"Dream is not that which you see while sleeping, it is something that does not let you sleep."</p>
         </div>
 
-        {/* Chat Interface */}
         <Chat onTalkingChange={setIsTalking} />
 
-        {/* Footer */}
         <div className="footer-credit">
           <span className="footer-line"></span>
           <p>Developed with ❤️ by <strong>Archit</strong></p>
@@ -116,3 +152,4 @@ export default function Home() {
     </main>
   );
 }
+
