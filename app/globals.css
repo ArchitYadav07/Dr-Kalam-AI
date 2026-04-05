@@ -313,40 +313,68 @@ body {
 /* Mobile Action Button */
 .mobile-action-button {
   position: absolute;
-  top: 60%;
+  top: 85%; /* Moved to bottom to clear model body */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  width: 80%;
-  max-width: 300px;
+  width: 70%;
+  max-width: 250px;
 }
 
 .glass-btn {
   width: 100%;
-  padding: 1rem 2rem;
-  background: rgba(59, 130, 246, 0.1);
+  padding: 0.8rem 1.5rem;
+  background: rgba(59, 130, 246, 0.15);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 99px; /* Pill shape */
   color: white;
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
 .glass-btn:active {
-  transform: scale(0.98);
-  background: rgba(59, 130, 246, 0.2);
+  transform: translate(-50%, -50%) scale(0.95);
+  background: rgba(59, 130, 246, 0.25);
+}
+
+/* Back to Top / Model button */
+.scroll-to-top-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
 }
 
 /* Scroll down indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 2rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -354,7 +382,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.3);
   animation: bounce-down 2s infinite;
 }
 

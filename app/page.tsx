@@ -100,6 +100,10 @@ export default function Home() {
     chatSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Mobile: vertical scroll layout
   if (isMobile) {
     return (
@@ -122,7 +126,6 @@ export default function Home() {
           </div>
 
           <div className="scroll-indicator" onClick={scrollToChat}>
-            <span>Scroll to chat</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 5v14M5 12l7 7 7-7" />
             </svg>
@@ -132,6 +135,16 @@ export default function Home() {
         {/* Section 2: Chat */}
         <section className="mobile-chat-section" ref={chatSectionRef}>
           <Chat onTalkingChange={setIsTalking} />
+          
+          <div className="scroll-to-top-container" onClick={scrollToTop}>
+            <button className="back-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M18 15l-6-6-6 6" />
+              </svg>
+              <span>Back to Model</span>
+            </button>
+          </div>
+
           <div className="mobile-footer">
             <p>Developed with ❤️ by <strong>Archit</strong></p>
           </div>
