@@ -10,7 +10,11 @@ interface Message {
   timestamp: Date;
 }
 
-export default function Chat() {
+interface ChatProps {
+  onTalkingChange?: (isTalking: boolean) => void;
+}
+
+export default function Chat({ onTalkingChange }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -42,6 +46,7 @@ export default function Chat() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    onTalkingChange?.(true);
 
     try {
       const response = await fetch('/api/chat', {
@@ -52,9 +57,18 @@ export default function Chat() {
 
       const data = await response.json();
 
+      let text = data.text;
+      
+      // If the API explicitly returns an error message, use it or a better fallback
+      if (!text && data.error) {
+        text = `My mission encountered a technical difficulty: ${data.details || data.error}. Let us try again with courage.`;
+      } else if (!text) {
+        text = "I am reflecting on your words. Let us continue our journey of learning.";
+      }
+
       const kalamMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.text || "I am reflecting on your words. Let us continue our journey of learning.",
+        text: text,
         sender: 'kalam',
         timestamp: new Date(),
       };
@@ -62,8 +76,15 @@ export default function Chat() {
       setMessages((prev) => [...prev, kalamMessage]);
     } catch (error) {
       console.error('Chat error:', error);
+      setMessages((prev) => [...prev, {
+        id: Date.now().toString(),
+        text: "My communications seem to be offline. Please check your internet connection.",
+        sender: 'kalam',
+        timestamp: new Date()
+      }]);
     } finally {
       setIsLoading(false);
+      onTalkingChange?.(false);
     }
   };
 

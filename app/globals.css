@@ -159,15 +159,39 @@ body {
   top: 4rem;
   left: 4rem;
   pointer-events: auto;
+  max-width: 480px;
 }
 
 .title-card h1 {
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
   letter-spacing: -1px;
   margin: 0;
-  line-height: 1;
+  line-height: 1.1;
+}
+
+.title-highlight {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.subtitle-quote {
+  font-size: 0.85rem;
+  color: rgba(251, 191, 36, 0.5);
+  margin-top: 0.75rem;
+  font-style: italic;
+  line-height: 1.6;
+  border-left: 2px solid rgba(251, 191, 36, 0.3);
+  padding-left: 0.75rem;
 }
 
 .title-card p {
@@ -189,6 +213,36 @@ body {
   border: 1px solid rgba(251, 191, 36, 0.2);
 }
 
+/* Footer Credit */
+.footer-credit {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 4rem;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.footer-credit p {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.footer-credit strong {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
 /* Custom Scrollbar */
 .chat-messages::-webkit-scrollbar {
   width: 4px;
@@ -200,3 +254,4 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
+
