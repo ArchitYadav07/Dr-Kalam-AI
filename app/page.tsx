@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import AvatarScene from '@/components/Avatar';
 import Chat from '@/components/Chat';
+import StatsBanner from '@/components/StatsBanner';
 import { useProgress } from '@react-three/drei';
 
 function LoadingOverlay() {
@@ -84,6 +85,20 @@ function LoadingOverlay() {
   );
 }
 
+const FeedbackButton = () => (
+  <a 
+    href="https://docs.google.com/forms/d/e/1FAIpQLSd8PRWm-Vyn4Accn_DIc1hhE4g1_7yI7o6DlE8wAdWSwyrYFA/viewform?usp=publish-editor" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="footer-feedback-btn"
+  >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    Feedback
+  </a>
+);
+
 export default function Home() {
   const [isTalking, setIsTalking] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -109,6 +124,7 @@ export default function Home() {
     return (
       <div className="mobile-scroll-container">
         <LoadingOverlay />
+        <StatsBanner />
 
         {/* Section 1: Full-screen 3D Model */}
         <section className="mobile-model-section">
@@ -119,6 +135,7 @@ export default function Home() {
             <p className="subtitle">Inspiring the minds of tomorrow.</p>
           </div>
           
+          {/* Action Button - moved to bottom */}
           <div className="mobile-action-button" onClick={scrollToChat}>
             <button className="glass-btn">
               Chat with Dr. Kalam
@@ -134,19 +151,24 @@ export default function Home() {
 
         {/* Section 2: Chat */}
         <section className="mobile-chat-section" ref={chatSectionRef}>
-          <Chat onTalkingChange={setIsTalking} />
-          
-          <div className="scroll-to-top-container" onClick={scrollToTop}>
-            <button className="back-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M18 15l-6-6-6 6" />
-              </svg>
-              <span>Back to Model</span>
+          <div className="chat-section-header">
+            <button className="back-to-model-pill" onClick={scrollToTop}>
+               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                 <path d="M18 15l-6-6-6 6" />
+               </svg>
+               Back to Model
             </button>
           </div>
 
+          <Chat onTalkingChange={setIsTalking} />
+          
           <div className="mobile-footer">
-            <p>Developed with ❤️ by <strong>Archit</strong></p>
+            <p>
+              Created by <a href="https://archityadav.netlify.app/" target="_blank" rel="noopener noreferrer" className="footer-link">Archit Yadav</a> in collaboration with <a href="https://www.novatechrobo.com/" target="_blank" rel="noopener noreferrer" className="footer-link">Novatech Robo Pvt Ltd</a>
+            </p>
+            <div className="mobile-feedback-wrapper">
+              <FeedbackButton />
+            </div>
           </div>
         </section>
       </div>
@@ -157,6 +179,7 @@ export default function Home() {
   return (
     <main className="main-container">
       <LoadingOverlay />
+      <StatsBanner />
       <AvatarScene isTalking={isTalking} />
 
       <div className="ui-layer">
@@ -171,7 +194,10 @@ export default function Home() {
 
         <div className="footer-credit">
           <span className="footer-line"></span>
-          <p>Developed with ❤️ by <strong>Archit</strong></p>
+          <p>
+            Created by <a href="https://archityadav.netlify.app/" target="_blank" rel="noopener noreferrer" className="footer-link">Archit Yadav</a> in collaboration with <a href="https://www.novatechrobo.com/" target="_blank" rel="noopener noreferrer" className="footer-link">Novatech Robo Pvt Ltd</a>
+          </p>
+          <FeedbackButton />
         </div>
       </div>
     </main>

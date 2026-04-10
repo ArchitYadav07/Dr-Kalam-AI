@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Send, User, MessageCircle } from 'lucide-react';
 
 interface Message {
@@ -26,6 +26,7 @@ export default function Chat({ onTalkingChange }: ChatProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const hasSentFirstMessage = useRef(false);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -49,10 +50,12 @@ export default function Chat({ onTalkingChange }: ChatProps) {
     onTalkingChange?.(true);
 
     try {
+      const isFirstMessage = !hasSentFirstMessage.current;
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input, history: messages }),
+        body: JSON.stringify({ message: input, history: messages, isFirstMessage }),
       });
 
       const data = await response.json();
@@ -74,6 +77,12 @@ export default function Chat({ onTalkingChange }: ChatProps) {
       };
 
       setMessages((prev) => [...prev, kalamMessage]);
+
+      // Notify the stats banner that a successful prompt was generated!
+      if (isFirstMessage) {
+        window.dispatchEvent(new Event('chat-interaction'));
+        hasSentFirstMessage.current = true;
+      }
     } catch (error) {
       console.error('Chat error:', error);
       setMessages((prev) => [...prev, {
@@ -123,6 +132,13 @@ export default function Chat({ onTalkingChange }: ChatProps) {
       </div>
 
       <style jsx>{`
+        .chat-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
         .dot-flashing {
           position: relative;
           width: 6px;
