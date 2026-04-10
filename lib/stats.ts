@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getStore } from '@netlify/blobs';
 
 export interface StatsData {
   total: number;
@@ -10,7 +11,6 @@ export interface StatsData {
 export interface Stats {
   sessions?: StatsData;
   prompts?: StatsData;
-  // Legacy support
   total?: number;
   daily?: Record<string, number>;
   weekly?: Record<string, number>;
@@ -64,6 +64,20 @@ function migrateStatsIfNeeded(stats: Stats) {
 }
 
 export async function getStats(): Promise<Stats> {
+  // 1. Try Netlify Blobs FIRST (Production Cloud)
+  try {
+    const store = getStore('dr-kalam-stats');
+    const cloudData = await store.get('metrics', { type: 'json' });
+    if (cloudData) {
+      const stats = cloudData as Stats;
+      migrateStatsIfNeeded(stats);
+      return stats;
+    }
+  } catch (error) {
+    // Fails locally if Netlify CLI context isn't active.
+  }
+
+  // 2. Fallback to Local Filesystem (Local Development)
   initializeStatsFile();
   try {
     const raw = fs.readFileSync(statsFilePath, 'utf8');
@@ -71,7 +85,7 @@ export async function getStats(): Promise<Stats> {
     migrateStatsIfNeeded(stats);
     return stats;
   } catch (error) {
-    console.error('Failed to read stats file:', error);
+    console.error('Failed to read stats:', error);
     return { sessions: getEmptyStatsData(), prompts: getEmptyStatsData() };
   }
 }
@@ -95,10 +109,19 @@ export async function incrementStats(isNewSession: boolean): Promise<void> {
       incrementData(stats.prompts, dayKey, weekKey);
   }
 
+  // 1. Save to Netlify Blobs (Production)
+  try {
+    const store = getStore('dr-kalam-stats');
+    await store.setJSON('metrics', stats);
+  } catch (error) {
+     // Expected to fail locally
+  }
+
+  // 2. Also save to Local FS (Development)
   try {
     fs.writeFileSync(statsFilePath, JSON.stringify(stats, null, 2));
   } catch (error) {
-    console.error('Failed to increment stats:', error);
+    console.error('Failed to write local stats:', error);
   }
 }
 
