@@ -25,10 +25,13 @@ function getDayKey(): string {
 
 function getWeekKey(): string {
   const date = new Date();
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-  const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
-  const weekNum = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-  return `${date.getFullYear()}-W${weekNum}`;
+  // Normalize to UTC midnight to avoid serverless timezone shifts
+  date.setUTCHours(0, 0, 0, 0); 
+  const day = date.getUTCDay();
+  // Shift to the Monday of the current week
+  const diff = date.getUTCDate() - day + (day === 0 ? -6 : 1);
+  date.setUTCDate(diff);
+  return 'W-' + date.toISOString().split('T')[0]; // e.g. "W-2026-04-06"
 }
 
 function getEmptyStatsData(): StatsData {
