@@ -113,7 +113,7 @@ export default function AvatarScene({ isTalking = false }: { isTalking?: boolean
       <Canvas
         camera={{ position: [0, 1.5, isMobile ? 5.5 : 4.5], fov: isMobile ? 40 : 35 }}
         shadows={!isMobile}
-        dpr={isMobile ? [1, 1.5] : [1, 2]}
+        dpr={isMobile ? 1 : [1, 2]}
         performance={{ min: 0.5 }}
         gl={{ 
           antialias: !isMobile,

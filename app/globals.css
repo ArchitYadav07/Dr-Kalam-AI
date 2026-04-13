@@ -302,10 +302,9 @@ body {
   touch-action: none; /* allow 3D interaction */
 }
 
-/* Title overlay on the model section */
 .mobile-title-overlay {
   position: absolute;
-  top: 1.5rem;
+  top: 5rem;
   left: 1.5rem;
   right: 1.5rem;
   z-index: 10;

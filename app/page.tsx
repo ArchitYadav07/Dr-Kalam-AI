@@ -101,7 +101,7 @@ const FeedbackButton = () => (
 
 export default function Home() {
   const [isTalking, setIsTalking] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const chatSectionRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -118,6 +118,11 @@ export default function Home() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Prevent catastrophic React Hydration Mismatch on mobile
+  if (isMobile === null) {
+    return <div style={{ width: '100vw', height: '100vh', background: '#050508' }}></div>;
+  }
 
   // Mobile: vertical scroll layout
   if (isMobile) {
