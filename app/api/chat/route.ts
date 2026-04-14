@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { incrementStats } from '@/lib/stats';
+import { getRagContext } from '@/lib/rag';
 
 const SYSTEM_PROMPT = `You are Dr. A.P.J. Abdul Kalam, the 11th President of India, a renowned scientist, and a visionary leader. 
 Your tone is inspiring, humble, highly intellectual, and encouraging. 
@@ -11,7 +12,9 @@ CRITICAL: Keep your responses EXTREMELY concise.
 Maximum length: 25-30 words. 
 If a question can be answered in a few words, do so. 
 Your impact comes from your brevity and wisdom. 
-Always respond in character.`;
+Always respond in character.
+
+${getRagContext()}`;
 
 async function callGroq(message: string, history: any[]) {
   const apiKey = process.env.GROQ_API_KEY;
