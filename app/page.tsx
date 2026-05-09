@@ -137,6 +137,7 @@ export default function Home() {
           <div className="mobile-title-overlay">
             <span className="badge">Vision 2026</span>
             <h1>Dr. <span className="title-highlight">Kalam</span> AI</h1>
+            <p className="expert-guidance">Expert Guidance and ideas from Prof.CRS KUMAR, DIAT (Defence Institute of Advanced Technology)</p>
             <p className="subtitle">Inspiring the minds of tomorrow.</p>
           </div>
           
@@ -191,6 +192,7 @@ export default function Home() {
         <div className="title-card">
           <span className="badge">Vision 2026</span>
           <h1>Dr. <span className="title-highlight">Kalam</span> AI</h1>
+          <p className="expert-guidance">Expert Guidance and ideas from Prof.CRS KUMAR, DIAT (Defence Institute of Advanced Technology)</p>
           <p className="subtitle">Inspiring the minds of tomorrow through the wisdom of today.</p>
           <p className="subtitle-quote">"Dream is not that which you see while sleeping, it is something that does not let you sleep."</p>
         </div>

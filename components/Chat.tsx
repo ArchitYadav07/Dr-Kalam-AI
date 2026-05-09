@@ -100,8 +100,21 @@ export default function Chat({ onTalkingChange }: ChatProps) {
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <MessageCircle size={24} color="#3b82f6" />
-        <h2>Dr. Kalam AI</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <MessageCircle size={24} color="#3b82f6" style={{ flexShrink: 0 }} />
+          <div>
+            <h2 style={{ margin: 0, fontSize: '1.1rem', lineHeight: 1.2 }}>Dr. Kalam AI</h2>
+            <p style={{ 
+              margin: 0, 
+              fontSize: '0.65rem', 
+              color: 'rgba(251, 191, 36, 0.8)', 
+              fontWeight: 500,
+              letterSpacing: '0.2px'
+            }}>
+              Expert Guidance: Prof.CRS KUMAR, DIAT
+            </p>
+          </div>
+        </div>
       </div>
       
       <div className="chat-messages" ref={scrollRef}>
