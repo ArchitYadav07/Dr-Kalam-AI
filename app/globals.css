@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --background: #050508;
   --foreground: #ffffff;
@@ -119,10 +123,13 @@ body {
   border-top: 1px solid var(--glass-border);
   display: flex;
   gap: 0.5rem;
+  align-items: center;
+  width: 100%;
 }
 
 .chat-input {
   flex: 1;
+  min-width: 0; /* Crucial to allow input element to shrink inside flex container */
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
@@ -137,6 +144,7 @@ body {
 }
 
 .send-btn {
+  flex-shrink: 0; /* Crucial to prevent send button from shrinking or being cut off */
   background: var(--accent-primary);
   border: none;
   border-radius: 10px;
