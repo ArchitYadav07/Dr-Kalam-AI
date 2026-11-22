@@ -36,10 +36,13 @@ async function callGroq(message: string, history: any[]) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "llama-3.1-8b-instant",
+      model: "openai/gpt-oss-20b",
       messages,
       temperature: 0.7,
-      max_tokens: 100,
+      // gpt-oss is a reasoning model: reasoning tokens count toward this limit,
+      // so keep effort low and leave headroom for the short in-character reply.
+      reasoning_effort: "low",
+      max_completion_tokens: 400,
     }),
   });
 
@@ -56,7 +59,7 @@ async function callGemini(message: string, history: any[]) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("Gemini API key missing");
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const chatHistory = (history || [])
     .filter((msg: any) => msg.text && msg.sender)
@@ -79,6 +82,8 @@ async function callGemini(message: string, history: any[]) {
     generationConfig: {
       maxOutputTokens: 100,
       temperature: 0.8,
+      // Disable "thinking" so it doesn't consume the small output budget.
+      thinkingConfig: { thinkingBudget: 0 },
     }
   };
 
@@ -103,7 +108,7 @@ export async function POST(request: Request) {
     const { message, history, isFirstMessage } = await request.json();
 
     try {
-      // Attempt Server 1: Groq (Llama 3.1 8b)
+      // Attempt Server 1: Groq (gpt-oss-20b)
       console.log("Attempting Groq (Server 1)...");
       const text = await callGroq(message, history);
       await incrementStats(isFirstMessage);
